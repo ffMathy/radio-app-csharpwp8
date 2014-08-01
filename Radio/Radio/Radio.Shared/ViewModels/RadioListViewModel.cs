@@ -64,9 +64,9 @@ namespace Radio.ViewModels
                     _latestChannels.RemoveAt(_latestChannels.Count - 1);
                 }
 
-                StorageHelper.StoreSetting("LatestChannels", _latestChannels);
+                await StorageHelper.StoreSetting("LatestChannels", _latestChannels);
 
-                Messenger.Default.Send(new GoToPageMessage("PlayerPage"));
+                NavigationHelper.NavigationService.Navigate(typeof(PlayerPage));
             });
 
             NationalChannels = channels.Where(c => c.Coverage == RadioChannel.ChannelCoverage.National);
@@ -87,7 +87,7 @@ namespace Radio.ViewModels
                 }
             }
 
-            StorageHelper.StoreSetting("LatestChannels", _latestChannels);
+            await StorageHelper.StoreSetting("LatestChannels", _latestChannels);
         }
 
         public DelegateWaitCommand ChannelTappedCommand { get; private set; }

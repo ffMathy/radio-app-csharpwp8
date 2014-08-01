@@ -1,8 +1,12 @@
 ﻿using System;
+using Windows.Networking.Connectivity;
 using Windows.UI.Popups;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Radio.Helpers;
 using Radio.ViewModels;
+using Radio.Models;
 
 namespace Radio
 {
@@ -39,11 +43,14 @@ namespace Radio
                 await messageDialog.ShowAsync();
             }
 
-            //if (!DeviceNetworkInformation.IsNetworkAvailable)
-            //{
-            //    MessageBox.Show("Du skal være forbundet til Internettet gennem WiFi eller via dit data-abonnement for at bruge app'en. Hvis du ikke havde forventet denne besked, kan det være tegn på at du oplever en dårlig forbindelse i øjeblikket." + Environment.NewLine + Environment.NewLine + "Prøv igen senere.", "Forbind til Internettet", MessageBoxButton.OK);
-            //    Application.Current.Exit();
-            //}
+            var networkProfile = NetworkInformation.GetInternetConnectionProfile();
+            if (networkProfile == null || networkProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
+            {
+                var messageDialog = new MessageDialog("Du skal være forbundet til Internettet gennem WiFi eller via dit data-abonnement for at bruge app'en. Hvis du ikke havde forventet denne besked, kan det være tegn på at du oplever en dårlig forbindelse i øjeblikket." + Environment.NewLine + Environment.NewLine + "Prøv igen senere.", "Forbind til Internettet");
+                await messageDialog.ShowAsync();
+
+                Application.Current.Exit();
+            }
 
             // Sample code to localize the ApplicationBar
             //BuildLocalizedApplicationBar();
@@ -64,5 +71,16 @@ namespace Radio
         //    ApplicationBarMenuItem appBarMenuItem = new ApplicationBarMenuItem(AppResources.AppBarMenuItemText);
         //    ApplicationBar.MenuItems.Add(appBarMenuItem);
         //}
+        private void RadioChannelList_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var listBoxItem = (ListBoxItem) sender;
+            var radioChannel = (RadioChannel)listBoxItem.DataContext;
+
+            var viewModel = RadioListViewModel.Instance;
+            if (viewModel.ChannelTappedCommand.CanExecute(radioChannel))
+            {
+                viewModel.ChannelTappedCommand.Execute(radioChannel);
+            }
+        }
     }
 }

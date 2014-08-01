@@ -26,6 +26,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Factories\Programs\Denmark\DRProgramList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Factories\Programs\EmptyProgramList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Factories\RadioChannelFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\NavigationHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\SerializationHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\StorageHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Messages\GoToPageMessage.cs" />

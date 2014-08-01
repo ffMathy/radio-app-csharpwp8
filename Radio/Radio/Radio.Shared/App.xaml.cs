@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
+using Radio.Helpers;
 
 namespace Radio
 {
@@ -47,6 +48,7 @@ namespace Radio
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            NavigationHelper.NavigationService = new NavigationService();
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
@@ -132,6 +134,15 @@ namespace Radio
 
             // TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        private class NavigationService : INavigationService
+        {
+            public void Navigate(Type type)
+            {
+                var frame = (Frame) Window.Current.Content;
+                frame.Navigate(type);
+            }
         }
     }
 }

@@ -52,7 +52,7 @@
                     </Grid>
                 </DataTemplate>
             </controls:ItemsHub.TitleTemplate>-->
-            <controls:ItemsHub.HeaderTemplate>
+            <!--<controls:ItemsHub.HeaderTemplate>
                 <DataTemplate>
                     <TextBlock Margin="-3,0" FontWeight="ExtraLight" FontSize="50" Opacity="1" Foreground="{StaticResource PhoneForegroundBrush}" d:DataContext="{d:DesignInstance models:RadioChannel}" Text="{Binding Name}" FontFamily="Segoe WP Light" />
                 </DataTemplate>
@@ -77,7 +77,7 @@
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <TextBlock Grid.Row="1" Margin="12,24,12,0" Style="{StaticResource HeaderTextBlockStyle}" Text="område" />
-                                <!--<ListPicker BorderThickness="0" Margin="0,-18" Padding="0" Grid.Row="2" ItemsSource="{Binding WebRadioFeeds}" SelectedItem="{Binding SelectedWebRadioFeed, Mode=TwoWay}" FontFamily="Segoe WP Light" FontWeight="ExtraLight">
+                                --><!--<ListPicker BorderThickness="0" Margin="0,-18" Padding="0" Grid.Row="2" ItemsSource="{Binding WebRadioFeeds}" SelectedItem="{Binding SelectedWebRadioFeed, Mode=TwoWay}" FontFamily="Segoe WP Light" FontWeight="ExtraLight">
                                     <ListPicker.FullModeItemTemplate>
                                         <DataTemplate>
                                             <ListPickerItem FontFamily="Portable User Interface">
@@ -106,7 +106,7 @@
                                             </ListPickerItem>
                                         </DataTemplate>
                                     </ListPicker.ItemTemplate>
-                                </ListPicker>-->
+                                </ListPicker>--><!--
                             </Grid>
                             <Grid Grid.Row="3" Visibility="{Binding ProgramList.RemainingPrograms, Converter={StaticResource CollectionVisibilityConverter}}">
                                 <Grid.RowDefinitions>
@@ -115,7 +115,7 @@
                                 </Grid.RowDefinitions>
                                 <TextBlock Grid.Row="0" Margin="12,24,12,0" Style="{StaticResource HeaderTextBlockStyle}" Text="program" />
                                 <ListBox Margin="12,12,12,0" Grid.Row="1" ItemsSource="{Binding ProgramList.RemainingPrograms}"  FontFamily="Portable User Interface">
-                                    <!--<ItemsControl.Style>
+                                    --><!--<ItemsControl.Style>
                                                 <Style TargetType="ItemsControl">
                                                     <Setter Property="ItemsPanel">
                                                         <Setter.Value>
@@ -132,7 +132,7 @@
                                                         </Setter.Value>
                                                     </Setter>
                                                 </Style>
-                                            </ItemsControl.Style>-->
+                                            </ItemsControl.Style>--><!--
                                     <ListBox.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <VirtualizingStackPanel/>
@@ -154,7 +154,7 @@
                                 </ListBox>
                             </Grid>
                         </Grid>
-                        <!--<Grid Margin="0,-25,0,0" Height="6" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        --><!--<Grid Margin="0,-25,0,0" Height="6" HorizontalAlignment="Stretch" VerticalAlignment="Top">
                                 <Rectangle Visibility="{StaticResource PhoneDarkThemeVisibility}">
                                     <Rectangle.Fill>
                                         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -171,10 +171,10 @@
                                         </LinearGradientBrush>
                                     </Rectangle.Fill>
                                 </Rectangle>
-                            </Grid>-->
+                            </Grid>--><!--
                     </Grid>
                 </DataTemplate>
-            </controls:ItemsHub.ItemTemplate>
+            </controls:ItemsHub.ItemTemplate>-->
         </controls:ItemsHub>
     </Grid>
 
