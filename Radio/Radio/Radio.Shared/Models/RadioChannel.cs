@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Radio.Helpers;
 
 namespace Radio.Models
@@ -61,6 +62,7 @@ namespace Radio.Models
             {
                 if (Equals(value, _selectedWebRadioFeed)) return;
 
+// ReSharper disable once CSharpWarnings::CS4014
                 StorageHelper.StoreSetting("SelectedWebRadioFeed" + Name, value);
 
                 _selectedWebRadioFeed = value;
@@ -114,11 +116,16 @@ namespace Radio.Models
                     _webRadioFeeds.Add(feed);
                 }
 
-                var selectedFeed = StorageHelper.GetSetting("SelectedWebRadioFeed" + Name, WebRadioFeeds.FirstOrDefault());
-                if (selectedFeed != null)
-                {
-                    SelectedWebRadioFeed = WebRadioFeeds.FirstOrDefault(f => f.AreaName == selectedFeed.AreaName);
-                }
+                LoadSelectedFeed();
+            }
+        }
+
+        private async void LoadSelectedFeed()
+        {
+            var selectedFeed = await StorageHelper.GetSetting("SelectedWebRadioFeed" + Name, WebRadioFeeds.FirstOrDefault());
+            if (selectedFeed != null)
+            {
+                SelectedWebRadioFeed = WebRadioFeeds.FirstOrDefault(f => f.AreaName == selectedFeed.AreaName);
             }
         }
 

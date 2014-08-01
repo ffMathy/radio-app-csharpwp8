@@ -17,6 +17,11 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Commands\DelegateWaitCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ItemsHub.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\CollectionVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\ObjectVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\ProgramStartedOpacityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\RadioWebFeedCollectionVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\TimeConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Factories\DenmarkRadioChannelFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Factories\Programs\Denmark\DRProgramList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Factories\Programs\EmptyProgramList.cs" />

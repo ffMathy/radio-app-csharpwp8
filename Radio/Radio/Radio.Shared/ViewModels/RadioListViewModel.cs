@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources.Core;
 using GalaSoft.MvvmLight.Messaging;
 using Radio.Commands;
@@ -14,7 +15,7 @@ namespace Radio.ViewModels
 {
     class RadioListViewModel
     {
-        private readonly ObservableCollection<RadioChannel> _latestChannels;
+        private ObservableCollection<RadioChannel> _latestChannels;
 
         public IEnumerable<RadioChannel> LatestChannels
         {
@@ -42,19 +43,11 @@ namespace Radio.ViewModels
         {
             var resourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("Resources");
 
-            var factory = RadioChannelFactory.GetNationalChannelFactory(resourceMap.GetValue("FactoryName").ValueAsString);
+            var factoryName = resourceMap.GetValue("FactoryName").ValueAsString;
+            var factory = RadioChannelFactory.GetNationalChannelFactory(factoryName);
             var channels = factory.CreateRadioChannels().ToArray();
 
-            _latestChannels = Debugger.IsAttached ? new ObservableCollection<RadioChannel>(channels.Take(10)) : StorageHelper.GetSetting("LatestChannels", new ObservableCollection<RadioChannel>());
-            foreach (var channel in _latestChannels.ToArray())
-            {
-                if (!channels.Contains(channel))
-                {
-                    _latestChannels.Remove(channel);
-                }
-            }
-
-            StorageHelper.StoreSetting("LatestChannels", _latestChannels);
+            LoadLatestChannels(channels);
 
             ChannelTappedCommand = new DelegateWaitCommand(async delegate(object o)
             {
@@ -79,6 +72,22 @@ namespace Radio.ViewModels
             NationalChannels = channels.Where(c => c.Coverage == RadioChannel.ChannelCoverage.National);
             LocalChannels = channels.Where(c => c.Coverage == RadioChannel.ChannelCoverage.Local);
             InternationalChannels = channels.Where(c => c.Coverage == RadioChannel.ChannelCoverage.International);
+        }
+
+        private async void LoadLatestChannels(IEnumerable<RadioChannel> channels)
+        {
+            _latestChannels = Debugger.IsAttached
+                ? new ObservableCollection<RadioChannel>(channels.Take(10))
+                : await StorageHelper.GetSetting("LatestChannels", new ObservableCollection<RadioChannel>());
+            foreach (var channel in _latestChannels.ToArray())
+            {
+                if (!channels.Contains(channel))
+                {
+                    _latestChannels.Remove(channel);
+                }
+            }
+
+            StorageHelper.StoreSetting("LatestChannels", _latestChannels);
         }
 
         public DelegateWaitCommand ChannelTappedCommand { get; private set; }

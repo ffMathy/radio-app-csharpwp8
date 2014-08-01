@@ -1,4 +1,5 @@
-﻿using Windows.UI.Popups;
+﻿using System;
+using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 using Radio.Helpers;
 using Radio.ViewModels;
@@ -30,12 +31,12 @@ namespace Radio
             //    tile.Update(cycleData);
             //}
 
-            if (!StorageHelper.GetSetting<bool>("HasLaunchedBefore"))
+            if (!await StorageHelper.GetSetting<bool>("HasLaunchedBefore"))
             {
-                StorageHelper.StoreSetting("HasLaunchedBefore", true);
+                await StorageHelper.StoreSetting("HasLaunchedBefore", true);
 
                 var messageDialog = new MessageDialog("Der er lige nogle få ting du skal vide før du går i gang.\n\nAppen er designet sådan at den altid først prøver at afspille den bedste kvalitet. Hvis der så opstår en afbrydelse, nedsætter den kvaliteten af lyden og prøver igen.\n\nDette kan forsage at du (når du får dårligt signal) lige bliver koblet fra lyden et sekunds tid, mens vi skifter kvalitet.\n\nTil gengæld vil denne app fungere over din dataforbindelse. Du skal dog desuden bemærke, at appen fungerer bedst over WiFi, og at telefonens WiFi slukker når telefonen går i dvale.", "Hej! Lige et par småting ...");
-                messageDialog.ShowAsync();
+                await messageDialog.ShowAsync();
             }
 
             //if (!DeviceNetworkInformation.IsNetworkAvailable)

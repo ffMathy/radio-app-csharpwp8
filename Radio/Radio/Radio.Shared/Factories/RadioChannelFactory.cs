@@ -8,14 +8,15 @@ namespace Radio.Factories
 {
     public abstract class RadioChannelFactory
     {
-        private static readonly Assembly _assembly;
+
+        //private static readonly Assembly Assembly;
 
         protected abstract IEnumerable<RadioChannel> CreateNationalRadioChannels();
         protected abstract IEnumerable<RadioChannel> CreateLocalRadioChannels();
 
         static RadioChannelFactory()
         {
-            _assembly = Assembly.Load(new AssemblyName("RadioV2.Controllers"));
+            //Assembly = Assembly.Load(new AssemblyName(typeof(RadioChannelFactory).AssemblyQualifiedName));
         }
 
         public IEnumerable<RadioChannel> CreateRadioChannels()
@@ -48,11 +49,15 @@ namespace Radio.Factories
         public static RadioChannelFactory GetNationalChannelFactory(string countryName)
         {
 
+            //TODO: make it localized for real.
+
             countryName = "Denmark";
 
-            var type = _assembly.DefinedTypes.First(t => t.Name == countryName + "RadioChannelFactory").AsType();
+            //TODO: make the dynamic instantiation work.
+            //var type = Assembly.DefinedTypes.First(t => t.Name == countryName + "RadioChannelFactory").AsType();
+            //var instance = Activator.CreateInstance(type) as RadioChannelFactory;
 
-            var instance = Activator.CreateInstance(type) as RadioChannelFactory;
+            var instance = new DenmarkRadioChannelFactory();
             return instance;
 
         }

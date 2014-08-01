@@ -2,6 +2,13 @@
     x:Class="Radio.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Radio">
-
+    xmlns:local="using:Radio"
+    xmlns:converters="using:Radio.Converters">
+    <Application.Resources>
+        <converters:ObjectVisibilityConverter x:Key="ObjectVisibilityConverter" />
+        <converters:ProgramStartedOpacityConverter x:Key="ProgramStartedOpacityConverter" />
+        <converters:TimeConverter x:Key="TimeConverter" />
+        <converters:CollectionVisibilityConverter x:Key="CollectionVisibilityConverter" />
+        <converters:RadioWebFeedCollectionVisibilityConverter x:Key="RadioWebFeedCollectionVisibilityConverter" />
+    </Application.Resources>
 </Application>

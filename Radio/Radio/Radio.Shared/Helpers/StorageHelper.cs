@@ -1,4 +1,9 @@
-﻿using Windows.Storage;
+﻿using System;
+using System.IO;
+using System.Text;
+using System.Threading.Tasks;
+using Windows.Storage;
+using Windows.Storage.Streams;
 
 namespace Radio.Helpers
 {
@@ -9,6 +14,11 @@ namespace Radio.Helpers
             get { return ApplicationData.Current.RoamingSettings; }
         }
 
+        private static StorageFolder StorageRoot
+        {
+            get { return ApplicationData.Current.RoamingFolder; }
+        }
+
         /// <summary>
         ///     Stored a setting, returns true if success
         /// </summary>
@@ -16,12 +26,20 @@ namespace Radio.Helpers
         /// <param name="value"></param>
         /// <param name="overwrite"></param>
         /// <returns></returns>
-        public static bool StoreSetting<T>(string key, T value, bool overwrite = true)
+        public static async Task<bool> StoreSetting<T>(string key, T value, bool overwrite = true)
         {
             if (overwrite || !DataContainer.Values.ContainsKey(key))
             {
                 var dataString = SerializationHelper.Serialize(value);
-                DataContainer.Values[key] = dataString;
+                var bytes = Encoding.UTF8.GetBytes(dataString);
+
+                var file = await StorageRoot.CreateFileAsync(key, CreationCollisionOption.ReplaceExisting);
+                using (var stream = await file.OpenStreamForWriteAsync())
+                {
+                    await stream.WriteAsync(bytes, 0, bytes.Length);
+                    await stream.FlushAsync();
+                }
+
 
                 return true;
             }
@@ -35,17 +53,24 @@ namespace Radio.Helpers
         /// <typeparam name="T"></typeparam>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static T GetSetting<T>(string key)
+        public static async Task<T> GetSetting<T>(string key)
         {
-            return GetSetting(key, default(T));
+            return await GetSetting(key, default(T));
         }
 
-        public static T GetSetting<T>(string key, T defaultValue)
+        public static async Task<T> GetSetting<T>(string key, T defaultValue)
         {
             if (DataContainer.Values.ContainsKey(key))
             {
-                var data = (string)DataContainer.Values[key];
-                return SerializationHelper.Deserialize<T>(data);
+                var file = await StorageRoot.GetFileAsync(key);
+                using (var stream = await file.OpenStreamForReadAsync())
+                {
+                    var buffer = new byte[stream.Length];
+                    await stream.ReadAsync(buffer, 0, buffer.Length);
+
+                    var data = Encoding.UTF8.GetString(buffer, 0, buffer.Length);
+                    return SerializationHelper.Deserialize<T>(data);
+                }
             }
 
             return defaultValue;

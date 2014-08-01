@@ -5,8 +5,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    FontFamily="{StaticResource PhoneFontFamilyNormal}"
-    FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
@@ -16,35 +14,24 @@
     d:DataContext="{d:DesignInstance viewModels:RadioListViewModel}" >
 
     <Page.Resources>
-        <Style TargetType="TextBlock" x:Key="CategoryStyle" BasedOn="{StaticResource GroupHeaderTextBlockStyle}">
-            <Setter Property="FontWeight" Value="ExtraLight" />
-        </Style>
+        <Style TargetType="TextBlock" x:Key="CategoryStyle" BasedOn="{StaticResource GroupHeaderTextBlockStyle}" />
         <Style x:Key="CategoryItemsList" TargetType="ItemsControl">
             <Setter Property="Margin" Value="0,6,0,24"/>
             <Setter Property="ItemTemplate">
                 <Setter.Value>
                     <DataTemplate>
                         <ListBoxItem HorizontalAlignment="Left" Margin="0" d:DataContext="{d:DesignInstance models:RadioChannel}">
-                            <interactivity:Interaction.Behaviors>
-                                <core:EventTriggerBehavior EventName="Tap">
-                                    <core:InvokeCommandAction
-                                        Command="{Binding DataContext.ChannelTappedCommand, ElementName=Page, Mode=OneWay}"
-                                        CommandParameter="{Binding}" />
-                                </core:EventTriggerBehavior>
-                            </interactivity:Interaction.Behaviors>
-                            <Grid Margin="12,12,12,12">
+                            <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <!--<Rectangle Margin="-4,-4,0,-6" Grid.RowSpan="2" VerticalAlignment="Center" Width="40" Height="40" Fill="{StaticResource PhoneAccentBrush}">
-                                    <Rectangle.>
-                                        <ImageBrush ImageSource="/Assets/Icons/music.png" />
-                                    </Rectangle.>
-                                </Rectangle>-->
-                                <TextBlock Margin="6,0" Grid.Row="0" FontFamily="Segoe WP Light" FontWeight="ExtraLight" VerticalAlignment="Center" Grid.Column="1" Text="{Binding Name}" Style="{StaticResource PhoneTextTitle2Style}" />
-                                <TextBlock Visibility="{Binding ProgramList.CurrentProgram, Converter={StaticResource ObjectVisibilityConverter}}" TextTrimming="WordEllipsis" Opacity="0.35" Margin="6,0" Grid.Row="0" FontFamily="Segoe WP Light" FontWeight="ExtraLight" VerticalAlignment="Center" Grid.Column="2" Text="{Binding ProgramList.CurrentProgram.Title}" Style="{StaticResource PhoneTextTitle2Style}" />
+                                <Canvas VerticalAlignment="Center" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="appbar_music" Width="24" Height="24">
+                                    <Path Width="24" Height="24" Canvas.Left="0" Canvas.Top="0" Stretch="Fill" Fill="{StaticResource PhoneAccentBrush}" Data="F1 M 26.9167,47.5L 28.5,47.6496L 28.5,23.75L 53.8333,19L 53.8333,47.5C 53.8333,50.1234 50.9978,52.25 47.5,52.25C 44.0022,52.25 41.1667,50.1234 41.1667,47.5C 41.1667,44.8766 44.0022,42.75 47.5,42.75C 48.0467,42.75 48.5773,42.802 49.0833,42.8997L 49.0833,24.6406L 33.25,27.6094L 33.25,52.25C 33.25,54.8734 30.4145,57 26.9167,57C 23.4189,57 20.5833,54.8734 20.5833,52.25C 20.5833,49.6266 23.4189,47.5 26.9167,47.5 Z "/>
+                                </Canvas>
+                                <TextBlock Margin="18,0" Grid.Row="0" FontFamily="Segoe WP Light" FontWeight="ExtraLight" VerticalAlignment="Center" Grid.Column="1" Text="{Binding Name}" Style="{StaticResource TitleTextBlockStyle}" />
+                                <TextBlock Visibility="{Binding ProgramList.CurrentProgram, Converter={StaticResource ObjectVisibilityConverter}}" TextTrimming="WordEllipsis" Opacity="0.35" Margin="6,0" Grid.Row="0" FontFamily="Segoe WP Light" FontWeight="ExtraLight" VerticalAlignment="Center" Grid.Column="2" Text="{Binding ProgramList.CurrentProgram.Title}" Style="{StaticResource TitleTextBlockStyle}" />
                             </Grid>
                         </ListBoxItem>
                     </DataTemplate>
@@ -56,9 +43,8 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
-            <RowDefinition />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*"/>
-            <RowDefinition />
         </Grid.RowDefinitions>
 
         <!-- LOCALIZATION NOTE:
@@ -81,14 +67,14 @@
          -->
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="DANSK RADIO" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
-            <TextBlock Text="radiostationer" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        <StackPanel Grid.Row="0" Margin="19,0,0,0">
+            <TextBlock Text="DANSK RADIO" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
+            <TextBlock Text="radiostationer" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <ScrollViewer Grid.Row="1">
-            <Grid x:Name="ContentPanel" Margin="12,0,12,0">
+            <Grid VerticalAlignment="Top" x:Name="ContentPanel" Margin="19,0">
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition />

@@ -7,26 +7,36 @@ namespace Radio.Commands
     public class DelegateWaitCommand : ICommand
     {
         private readonly Func<object, Task> _execute;
+        private readonly Func<object, bool> _canExecute;
 
-        private bool _canExecute;
+        private bool _isIdle;
 
-        public DelegateWaitCommand(Func<object, Task> execute)
+        public DelegateWaitCommand(Func<object, Task> execute, Func<object, bool> canExecute = null)
         {
             if (execute == null)
             {
                 throw new ArgumentNullException("execute");
             }
 
+            _isIdle = true;
+
             _execute = execute;
 
-            _canExecute = true;
+            if (canExecute == null)
+            {
+                _canExecute = (obj) => true;
+            }
+            else
+            {
+                _canExecute = canExecute;
+            }
         }
 
         public event EventHandler CanExecuteChanged;
 
         public bool CanExecute(object parameter)
         {
-            return _canExecute;
+            return _isIdle && _canExecute(parameter);
         }
 
         public async void Execute(object parameter)
@@ -46,7 +56,7 @@ namespace Radio.Commands
 
         private void ChangeCanExecute(bool canExecute)
         {
-            _canExecute = canExecute;
+            _isIdle = canExecute;
             OnCanExecuteChanged();
         }
     }
