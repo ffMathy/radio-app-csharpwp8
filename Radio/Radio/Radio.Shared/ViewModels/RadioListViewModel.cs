@@ -2,7 +2,12 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using Windows.ApplicationModel.Resources.Core;
 using GalaSoft.MvvmLight.Messaging;
+using Radio.Commands;
+using Radio.Factories;
+using Radio.Helpers;
+using Radio.Messages;
 using Radio.Models;
 
 namespace Radio.ViewModels
@@ -35,7 +40,9 @@ namespace Radio.ViewModels
 
         private RadioListViewModel()
         {
-            var factory = RadioChannelFactory.GetNationalChannelFactory(AppResources.FactoryName);
+            var resourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("Resources");
+
+            var factory = RadioChannelFactory.GetNationalChannelFactory(resourceMap.GetValue("FactoryName").ValueAsString);
             var channels = factory.CreateRadioChannels().ToArray();
 
             _latestChannels = Debugger.IsAttached ? new ObservableCollection<RadioChannel>(channels.Take(10)) : StorageHelper.GetSetting("LatestChannels", new ObservableCollection<RadioChannel>());

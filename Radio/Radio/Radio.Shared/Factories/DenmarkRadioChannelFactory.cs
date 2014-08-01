@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Radio.Factories.Programs.Denmark;
 using Radio.Models;
 using RadioV2.Controllers;
 using RadioV2.Controllers.Programs;
-using RadioV2.Controllers.Programs.Denmark;
 
 namespace Radio.Factories
 {

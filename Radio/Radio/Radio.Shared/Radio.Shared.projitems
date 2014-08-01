@@ -15,12 +15,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Commands\DelegateWaitCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ItemsHub.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Factories\DenmarkRadioChannelFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Factories\Programs\Denmark\DRProgramList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Factories\Programs\EmptyProgramList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Factories\RadioChannelFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\SerializationHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\StorageHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Messages\GoToPageMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Program.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ProgramList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\RadioBeacon.cs" />
@@ -29,5 +32,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\WorldCoordinate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\PlayerViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\RadioListViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="$(MSBuildThisFileDirectory)Resources\Resources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Libraries\HtmlAgilityPack.dll" />
   </ItemGroup>
 </Project>

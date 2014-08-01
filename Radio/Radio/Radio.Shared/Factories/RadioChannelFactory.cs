@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using Radio.Models;
 
-namespace RadioV2.Controllers
+namespace Radio.Factories
 {
     public abstract class RadioChannelFactory
     {
