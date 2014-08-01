@@ -22,6 +22,11 @@ namespace Radio.ViewModels
             get { return _latestChannels; }
         }
 
+        public IEnumerable<RadioChannel> AllChannels
+        {
+            get { return NationalChannels.Union(LocalChannels).Union(InternationalChannels); }
+        }
+
         public IEnumerable<RadioChannel> NationalChannels { get; private set; }
         public IEnumerable<RadioChannel> LocalChannels { get; private set; }
         public IEnumerable<RadioChannel> InternationalChannels { get; private set; }

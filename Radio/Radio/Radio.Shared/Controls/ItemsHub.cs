@@ -1,7 +1,8 @@
 ﻿using System.Collections;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
-// ReSharper disable once CheckNamespace
-namespace Windows.UI.Xaml.Controls
+namespace Radio.Controls
 {
     /// <summary>
     /// Represents a bindable template-driven Hub control.
@@ -34,30 +35,56 @@ namespace Windows.UI.Xaml.Controls
             }
         }
 
-        public IList ItemsSource
+        public DataTemplate ItemHeaderTemplate
         {
-            get { return (IList)GetValue(ItemsSourceProperty); }
+            get { return (DataTemplate)GetValue(ItemHeaderTemplateProperty); }
+            set { SetValue(ItemHeaderTemplateProperty, value); }
+        }
+
+        public static readonly DependencyProperty ItemHeaderTemplateProperty =
+            DependencyProperty.Register("ItemHeaderTemplate", typeof(DataTemplate), typeof(ItemsHub), new PropertyMetadata(null, ItemHeaderTemplateChanged));
+
+        private static void ItemHeaderTemplateChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        {
+            var hub = dependencyObject as ItemsHub;
+            if (hub != null)
+            {
+                var template = e.NewValue as DataTemplate;
+                if (template != null)
+                {
+                    foreach (var section in hub.Sections)
+                    {
+                        section.HeaderTemplate = template;
+                    }
+                }
+            }
+        }
+
+        public IEnumerable ItemsSource
+        {
+            get { return (IEnumerable)GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value); }
         }
 
         public static readonly DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register("ItemsSource", typeof(IList), typeof(ItemsHub), new PropertyMetadata(null, ItemsSourceChanged));
+            DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(ItemsHub), new PropertyMetadata(null, ItemsSourceChanged));
 
         private static void ItemsSourceChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
             var hub = dependencyObject as ItemsHub;
             if (hub != null)
             {
-                var items = e.NewValue as IList;
+                var items = e.NewValue as IEnumerable;
                 if (items != null)
                 {
                     hub.Sections.Clear();
                     foreach (var item in items)
                     {
-                        var section = new HubSection {DataContext = item, Header = item};
+                        var section = new HubSection { DataContext = item, Header = item };
 
-                        var template = hub.ItemTemplate;
-                        section.ContentTemplate = template;
+                        section.ContentTemplate = hub.ItemTemplate;
+                        section.HeaderTemplate = hub.ItemHeaderTemplate;
+
                         hub.Sections.Add(section);
                     }
                 }

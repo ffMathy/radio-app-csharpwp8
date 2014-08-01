@@ -11,7 +11,7 @@ namespace Radio.Factories
     {
         protected override IEnumerable<RadioChannel> CreateNationalRadioChannels()
         {
-            yield return new RadioChannel("DR P1", new Uri("/Assets/Stations/Denmark/dr-p1.jpg", UriKind.Relative),
+            yield return new RadioChannel("DR P1", new Uri("ms-appx:/Assets/Stations/Denmark/dr-p1.jpg"),
                 new[]
                 {
                     new RadioWebFeed("http://live-icy.gss.dr.dk:80/A/A03H.mp3", "http://live-icy.gss.dr.dk:80/A/A03L.mp3")
@@ -37,21 +37,21 @@ namespace Radio.Factories
                 new DRProgramList("p1")
                 );
 
-            yield return new RadioChannel("DR P2", new Uri("/Assets/Stations/Denmark/dr-p2.jpg", UriKind.Relative),
+            yield return new RadioChannel("DR P2", new Uri("ms-appx:/Assets/Stations/Denmark/dr-p2.jpg"),
                 new[]
                 {
                     new RadioWebFeed("http://live-icy.gss.dr.dk:80/A/A04H.mp3", "http://live-icy.gss.dr.dk:80/A/A04L.mp3")
                 }, 
                 new DRProgramList("p2"));
 
-            yield return new RadioChannel("DR P3", new Uri("/Assets/Stations/Denmark/dr-p3.jpg", UriKind.Relative),
+            yield return new RadioChannel("DR P3", new Uri("ms-appx:/Assets/Stations/Denmark/dr-p3.jpg"),
                 new[]
                 {
                     new RadioWebFeed("http://live-icy.gss.dr.dk:80/A/A05H.mp3", "http://live-icy.gss.dr.dk:80/A/A05L.mp3")
                 },
                 new DRProgramList("p3"));
 
-            yield return new RadioChannel("DR P4", new Uri("/Assets/Stations/Denmark/dr-p4.jpg", UriKind.Relative),
+            yield return new RadioChannel("DR P4", new Uri("ms-appx:/Assets/Stations/Denmark/dr-p4.jpg"),
                 new[]
                 {
                     new RadioWebFeed("Bornholm", "http://live-icy.gss.dr.dk:80/A/A06H.mp3", "http://live-icy.gss.dr.dk:80/A/A06L.mp3"),
@@ -93,49 +93,49 @@ namespace Radio.Factories
                 },
                 new DRProgramList("p4"));
 
-            yield return new RadioChannel("DR P5", new Uri("/Assets/Stations/Denmark/dr-p5.jpg", UriKind.Relative),
+            yield return new RadioChannel("DR P5", new Uri("ms-appx:/Assets/Stations/Denmark/dr-p5.jpg"),
                 new[]
                 {
                     new RadioWebFeed("http://live-icy.gss.dr.dk:80/A/A25H.mp3", "http://live-icy.gss.dr.dk:80/A/A25L.mp3")
                 }, 
                 new DRProgramList("p5"));
 
-            yield return new RadioChannel("DR P6", new Uri("/Assets/Stations/Denmark/dr-p6.jpg", UriKind.Relative),
+            yield return new RadioChannel("DR P6", new Uri("ms-appx:/Assets/Stations/Denmark/dr-p6.jpg"),
                 new[]
                 {
                     new RadioWebFeed("http://live-icy.gss.dr.dk:80/A/A29H.mp3", "http://live-icy.gss.dr.dk:80/A/A29L.mp3")
                 }, 
                 new DRProgramList("p6beat"));
 
-            yield return new RadioChannel("DR P7", new Uri("/Assets/Stations/Denmark/dr-p7.jpg", UriKind.Relative),
+            yield return new RadioChannel("DR P7", new Uri("ms-appx:/Assets/Stations/Denmark/dr-p7.jpg"),
                 new[]
                 {
                     new RadioWebFeed("http://live-icy.gss.dr.dk:80/A/A21H.mp3", "http://live-icy.gss.dr.dk:80/A/A21L.mp3")
                 }, 
                 new DRProgramList("p7mix"));
 
-            yield return new RadioChannel("DR P8", new Uri("/Assets/Stations/Denmark/dr-p8.jpg", UriKind.Relative),
+            yield return new RadioChannel("DR P8", new Uri("ms-appx:/Assets/Stations/Denmark/dr-p8.jpg"),
                 new[]
                 {
                     new RadioWebFeed("http://live-icy.gss.dr.dk:80/A/A22H.mp3", "http://live-icy.gss.dr.dk:80/A/A22L.mp3")
                 },
                 new DRProgramList("p8jazz"));
 
-            yield return new RadioChannel("DR MAMA", new Uri("/Assets/Stations/Denmark/dr-mama.jpg", UriKind.Relative),
+            yield return new RadioChannel("DR MAMA", new Uri("ms-appx:/Assets/Stations/Denmark/dr-mama.jpg"),
                 new[]
                 {
                     new RadioWebFeed("http://live-icy.gss.dr.dk:80/A/A18H.mp3", "http://live-icy.gss.dr.dk:80/A/A18L.mp3")
                 },
                 new DRProgramList("mama"));
 
-            yield return new RadioChannel("DR Ramasjang", new Uri("/Assets/Stations/Denmark/dr-ramasjang.jpg", UriKind.Relative),
+            yield return new RadioChannel("DR Ramasjang", new Uri("ms-appx:/Assets/Stations/Denmark/dr-ramasjang.jpg"),
                 new[]
                 {
                     new RadioWebFeed("http://live-icy.gss.dr.dk:80/A/A24H.mp3", "http://live-icy.gss.dr.dk:80/A/A24L.mp3")
                 },
                 new EmptyProgramList());
 
-            yield return new RadioChannel("DR Nyheder", new Uri("/Assets/Stations/Denmark/dr-nyheder.jpg", UriKind.Relative),
+            yield return new RadioChannel("DR Nyheder", new Uri("ms-appx:/Assets/Stations/Denmark/dr-nyheder.jpg"),
                 new[]
                 {
                     new RadioWebFeed("http://live-icy.gss.dr.dk:80/A/A02H.mp3", "http://live-icy.gss.dr.dk:80/A/A02L.mp3")
@@ -144,7 +144,7 @@ namespace Radio.Factories
 
         protected override IEnumerable<RadioChannel> CreateLocalRadioChannels()
         {
-            yield return new RadioChannel("Radio24Syv", new Uri("/Assets/Stations/Denmark/radio24syv.jpg", UriKind.Relative),
+            yield return new RadioChannel("Radio24Syv", new Uri("ms-appx:/Assets/Stations/Denmark/radio24syv.jpg"),
                 new[]
                 {
                     new RadioWebFeed("http://rrr.sz.xlcdn.com/?account=Radio24syv&file=ENC4_MP3128&type=live&service=icecast&port=8000&output=m3u", "http://rrr.sz.xlcdn.com/?account=Radio24syv&file=ENC1_Android64&type=live&service=icecast&port=8000&output=m3u"), 
@@ -165,49 +165,49 @@ namespace Radio.Factories
                     new RadioBeacon("Aarhus", 88.1, new WorldCoordinate(56.16294, 10.20392))
                 }, new EmptyProgramList());
 
-            yield return new RadioChannel("ANR", new Uri("/Assets/Stations/Denmark/anr.jpg", UriKind.Relative),
+            yield return new RadioChannel("ANR", new Uri("ms-appx:/Assets/Stations/Denmark/anr.jpg"),
                 new[]
                 {
                     new RadioWebFeed("http://stream.anr.dk/anr", "http://stream.anr.dk/anr"), 
                 }, new EmptyProgramList());
 
-            //yield return new RadioChannel("ANR Demo", new Uri("/Assets/Stations/Denmark/anr.jpg", UriKind.Relative),
+            //yield return new RadioChannel("ANR Demo", new Uri("/Assets/Stations/Denmark/anr.jpg"),
             //    new[]
             //    {
             //        new RadioWebFeed("http://stream.anr.dk/anrdemo", "http://stream.anr.dk/anrdemo"), 
             //    }, null);
 
-            //yield return new RadioChannel("ANR Funky", new Uri("/Assets/Stations/Denmark/anr.jpg", UriKind.Relative),
+            //yield return new RadioChannel("ANR Funky", new Uri("/Assets/Stations/Denmark/anr.jpg"),
             //    new[]
             //    {
             //        new RadioWebFeed("http://stream.anr.dk/anrfunky", "http://stream.anr.dk/anrfunky"), 
             //    }, null);
 
-            //yield return new RadioChannel("ANR Rock", new Uri("/Assets/Stations/Denmark/anr.jpg", UriKind.Relative),
+            //yield return new RadioChannel("ANR Rock", new Uri("/Assets/Stations/Denmark/anr.jpg"),
             //    new[]
             //    {
             //        new RadioWebFeed("http://stream.anr.dk/anrrock", "http://stream.anr.dk/anrrock"), 
             //    }, null);
 
-            //yield return new RadioChannel("ANR Hits", new Uri("/Assets/Stations/Denmark/anr.jpg", UriKind.Relative),
+            //yield return new RadioChannel("ANR Hits", new Uri("/Assets/Stations/Denmark/anr.jpg"),
             //    new[]
             //    {
             //        new RadioWebFeed("http://stream.anr.dk/anrhits", "http://stream.anr.dk/anrhits"), 
             //    }, null);
 
-            yield return new RadioChannel("Nova FM", new Uri("/Assets/Stations/Denmark/nova-fm.jpg", UriKind.Relative),
+            yield return new RadioChannel("Nova FM", new Uri("ms-appx:/Assets/Stations/Denmark/nova-fm.jpg"),
                 new[]
                 {
                     new RadioWebFeed("http://stream.novafm.dk/nova128", "http://stream.novafm.dk/nova128"), 
                 }, new EmptyProgramList());
 
-            yield return new RadioChannel("Radio 100 FM", new Uri("/Assets/Stations/Denmark/radio-100-fm.jpg", UriKind.Relative),
+            yield return new RadioChannel("Radio 100 FM", new Uri("ms-appx:/Assets/Stations/Denmark/radio-100-fm.jpg"),
                 new[]
                 {
                     new RadioWebFeed("http://onair.100fmlive.dk/100fm_live.mp3", "http://onair.100fmlive.dk/100fm_live.mp3"), 
                 }, new EmptyProgramList());
 
-            yield return new RadioChannel("The Voice", new Uri("/Assets/Stations/Denmark/the-voice.jpg", UriKind.Relative),
+            yield return new RadioChannel("The Voice", new Uri("ms-appx:/Assets/Stations/Denmark/the-voice.jpg"),
                 new[]
                 {
                     new RadioWebFeed("http://stream.voice.dk/voice128", "http://stream.voice.dk/voice128"), 

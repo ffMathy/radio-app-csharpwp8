@@ -2,22 +2,20 @@
     x:Class="Radio.PlayerPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
-    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Foreground="{StaticResource PhoneForegroundBrush}"
     xmlns:viewModels="using:Radio.ViewModels"
-    xmlns:controls="using:Windows.UI.Xaml.Controls"
+    xmlns:controls="using:Radio.Controls"
     xmlns:models="using:Radio.Models"
-    d:DataContext="{d:DesignInstance viewModels:PlayerViewModel}">
+    d:DataContext="{d:DesignInstance viewModels:PlayerViewModel}" RequestedTheme="Dark">
 
     <Page.Resources>
-        <Storyboard TargetName="BackgroundImage" Duration="0:00:00.5" TargetProperty="Opacity" x:Key="FadeBackgroundImageOut">
+        <Storyboard TargetName="BackgroundImage" Duration="0:00:01" TargetProperty="Opacity" x:Key="FadeBackgroundImageOut">
             <DoubleAnimation To="0.0" />
         </Storyboard>
-        <Storyboard TargetName="BackgroundImage" Duration="0:00:00.5" TargetProperty="Opacity" x:Key="FadeBackgroundImageIn">
+        <Storyboard TargetName="BackgroundImage" Duration="0:00:01" TargetProperty="Opacity" x:Key="FadeBackgroundImageIn">
             <DoubleAnimation To="1.0" />
         </Storyboard>
     </Page.Resources>
@@ -26,37 +24,30 @@
     <Grid x:Name="LayoutRoot">
         <Grid Grid.Row="0" VerticalAlignment="Stretch" Margin="0">
             <Image Name="BackgroundImage" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="UniformToFill" />
-            <!--<Rectangle VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Opacity="0.975" Visibility="{StaticResource PhoneDarkThemeVisibility}">
+
+            <Rectangle VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Opacity="0.975">
                 <Rectangle.Fill>
                     <LinearGradientBrush EndPoint="0.5,0.45" StartPoint="0.5,0">
                         <GradientStop Color="#AA000000" Offset="0"/>
-                        <GradientStop Color="{StaticResource PhoneBackgroundColor}" Offset="1"/>
+                        <GradientStop Color="Black" Offset="1"/>
                     </LinearGradientBrush>
                 </Rectangle.Fill>
             </Rectangle>
-            <Rectangle VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Opacity="0.975" Visibility="{StaticResource PhoneLightThemeVisibility}">
-                <Rectangle.Fill>
-                    <LinearGradientBrush EndPoint="0.5,0.45" StartPoint="0.5,0">
-                        <GradientStop Color="#50FFFFFF" Offset="0"/>
-                        <GradientStop Color="{StaticResource PhoneBackgroundColor}" Offset="1"/>
-                    </LinearGradientBrush>
-                </Rectangle.Fill>
-            </Rectangle>-->
+
         </Grid>
-        <controls:ItemsHub Name="Panorama" ItemsSource="{Binding PanoramaPlaylist}">
-            <!--<controls:ItemsHub.TitleTemplate>
+        <controls:ItemsHub SectionsInViewChanged="Hub_OnSectionsInViewChanged" Header="dansk radio" ItemsSource="{Binding Playlist}">
+            <controls:ItemsHub.HeaderTemplate>
                 <DataTemplate>
                     <Grid>
-                        <TextBlock Visibility="{StaticResource PhoneDarkThemeVisibility}" Foreground="White" Margin="6,12,6,-80" FontFamily="Segoe WP Light" FontWeight="ExtraLight" FontSize="170" Opacity="0.1">dansk radio</TextBlock>
-                        <TextBlock Visibility="{StaticResource PhoneLightThemeVisibility}" Foreground="White" Margin="6,12,6,-80" FontFamily="Segoe WP Light" FontWeight="ExtraLight" FontSize="170" Opacity="0.5">dansk radio</TextBlock>
+                        <TextBlock Foreground="White" Margin="8,-20,0,-70" FontWeight="ExtraLight" FontSize="130" Opacity="0.25">dansk radio</TextBlock>
                     </Grid>
                 </DataTemplate>
-            </controls:ItemsHub.TitleTemplate>-->
-            <!--<controls:ItemsHub.HeaderTemplate>
-                <DataTemplate>
-                    <TextBlock Margin="-3,0" FontWeight="ExtraLight" FontSize="50" Opacity="1" Foreground="{StaticResource PhoneForegroundBrush}" d:DataContext="{d:DesignInstance models:RadioChannel}" Text="{Binding Name}" FontFamily="Segoe WP Light" />
-                </DataTemplate>
             </controls:ItemsHub.HeaderTemplate>
+            <controls:ItemsHub.ItemHeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Margin="8,0,8,-10" FontWeight="ExtraLight" FontSize="50" Opacity="1" Foreground="{StaticResource PhoneForegroundBrush}" d:DataContext="{d:DesignInstance models:RadioChannel}" Text="{Binding Name}" />
+                </DataTemplate>
+            </controls:ItemsHub.ItemHeaderTemplate>
             <controls:ItemsHub.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -77,36 +68,36 @@
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <TextBlock Grid.Row="1" Margin="12,24,12,0" Style="{StaticResource HeaderTextBlockStyle}" Text="område" />
-                                --><!--<ListPicker BorderThickness="0" Margin="0,-18" Padding="0" Grid.Row="2" ItemsSource="{Binding WebRadioFeeds}" SelectedItem="{Binding SelectedWebRadioFeed, Mode=TwoWay}" FontFamily="Segoe WP Light" FontWeight="ExtraLight">
-                                    <ListPicker.FullModeItemTemplate>
-                                        <DataTemplate>
-                                            <ListPickerItem FontFamily="Portable User Interface">
-                                                <Grid d:DataContext="{d:DesignInstance models:RadioWebFeed}">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="5"/>
-                                                        <ColumnDefinition/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <Rectangle Fill="{StaticResource PhoneAccentBrush}" />
-                                                    <TextBlock TextWrapping="Wrap" Text="{Binding AreaName}" Style="{StaticResource PhoneTextTitle2Style}" Grid.Column="1" />
-                                                </Grid>
-                                            </ListPickerItem>
-                                        </DataTemplate>
-                                    </ListPicker.FullModeItemTemplate>
-                                    <ListPicker.ItemTemplate>
-                                        <DataTemplate>
-                                            <ListPickerItem FontFamily="Segoe WP Light" FontWeight="ExtraLight">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="5"/>
-                                                        <ColumnDefinition/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <Rectangle Fill="{StaticResource PhoneAccentBrush}" />
-                                                    <TextBlock Margin="12,3,12,4" Text="{Binding AreaName}" FontSize="25" Grid.Column="1" FontFamily="Segoe WP Light"/>
-                                                </Grid>
-                                            </ListPickerItem>
-                                        </DataTemplate>
-                                    </ListPicker.ItemTemplate>
-                                </ListPicker>--><!--
+                                <!--<ListPicker BorderThickness="0" Margin="0,-18" Padding="0" Grid.Row="2" ItemsSource="{Binding WebRadioFeeds}" SelectedItem="{Binding SelectedWebRadioFeed, Mode=TwoWay}" FontFamily="Segoe WP Light" FontWeight="ExtraLight">
+                                <ListPicker.FullModeItemTemplate>
+                                    <DataTemplate>
+                                        <ListPickerItem FontFamily="Portable User Interface">
+                                            <Grid d:DataContext="{d:DesignInstance models:RadioWebFeed}">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="5"/>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
+                                                <Rectangle Fill="{StaticResource PhoneAccentBrush}" />
+                                                <TextBlock TextWrapping="Wrap" Text="{Binding AreaName}" Style="{StaticResource PhoneTextTitle2Style}" Grid.Column="1" />
+                                            </Grid>
+                                        </ListPickerItem>
+                                    </DataTemplate>
+                                </ListPicker.FullModeItemTemplate>
+                                <ListPicker.ItemTemplate>
+                                    <DataTemplate>
+                                        <ListPickerItem FontFamily="Segoe WP Light" FontWeight="ExtraLight">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="5"/>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
+                                                <Rectangle Fill="{StaticResource PhoneAccentBrush}" />
+                                                <TextBlock Margin="12,3,12,4" Text="{Binding AreaName}" FontSize="25" Grid.Column="1" FontFamily="Segoe WP Light"/>
+                                            </Grid>
+                                        </ListPickerItem>
+                                    </DataTemplate>
+                                </ListPicker.ItemTemplate>
+                            </ListPicker>-->
                             </Grid>
                             <Grid Grid.Row="3" Visibility="{Binding ProgramList.RemainingPrograms, Converter={StaticResource CollectionVisibilityConverter}}">
                                 <Grid.RowDefinitions>
@@ -115,24 +106,24 @@
                                 </Grid.RowDefinitions>
                                 <TextBlock Grid.Row="0" Margin="12,24,12,0" Style="{StaticResource HeaderTextBlockStyle}" Text="program" />
                                 <ListBox Margin="12,12,12,0" Grid.Row="1" ItemsSource="{Binding ProgramList.RemainingPrograms}"  FontFamily="Portable User Interface">
-                                    --><!--<ItemsControl.Style>
-                                                <Style TargetType="ItemsControl">
-                                                    <Setter Property="ItemsPanel">
-                                                        <Setter.Value>
-                                                            <ItemsPanelTemplate>
-                                                                <VirtualizingStackPanel x:Name="Host"/>
-                                                            </ItemsPanelTemplate>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                    <Setter Property="Template">
-                                                        <Setter.Value>
-                                                            <ControlTemplate TargetType="ItemsControl">
-                                                                <ItemsPresenter/>
-                                                            </ControlTemplate>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Style>
-                                            </ItemsControl.Style>--><!--
+                                    <ItemsControl.Style>
+                                        <Style TargetType="ItemsControl">
+                                            <Setter Property="ItemsPanel">
+                                                <Setter.Value>
+                                                    <ItemsPanelTemplate>
+                                                        <VirtualizingStackPanel x:Name="Host"/>
+                                                    </ItemsPanelTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="ItemsControl">
+                                                        <ItemsPresenter/>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </ItemsControl.Style>
                                     <ListBox.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <VirtualizingStackPanel/>
@@ -154,27 +145,27 @@
                                 </ListBox>
                             </Grid>
                         </Grid>
-                        --><!--<Grid Margin="0,-25,0,0" Height="6" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                                <Rectangle Visibility="{StaticResource PhoneDarkThemeVisibility}">
-                                    <Rectangle.Fill>
-                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                            <GradientStop Color="{StaticResource PhoneBackgroundColor}" />
-                                            <GradientStop Offset="1" Color="#00000000" />
-                                        </LinearGradientBrush>
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                                <Rectangle Visibility="{StaticResource PhoneLightThemeVisibility}">
-                                    <Rectangle.Fill>
-                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                            <GradientStop Color="{StaticResource PhoneBackgroundColor}" />
-                                            <GradientStop Offset="1" Color="#00FFFFFF" />
-                                        </LinearGradientBrush>
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                            </Grid>--><!--
+                        <Grid Margin="0,-25,0,0" Height="6" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <!--<Rectangle Visibility="{StaticResource PhoneDarkThemeVisibility}">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                    <GradientStop Color="{StaticResource PhoneBackgroundColor}" />
+                                    <GradientStop Offset="1" Color="#00000000" />
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle Visibility="{StaticResource PhoneLightThemeVisibility}">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                    <GradientStop Color="{StaticResource PhoneBackgroundColor}" />
+                                    <GradientStop Offset="1" Color="#00FFFFFF" />
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>-->
+                        </Grid>
                     </Grid>
                 </DataTemplate>
-            </controls:ItemsHub.ItemTemplate>-->
+            </controls:ItemsHub.ItemTemplate>
         </controls:ItemsHub>
     </Grid>
 

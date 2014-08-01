@@ -35,7 +35,6 @@ namespace Radio.Models
         private RadioWebFeed _selectedWebRadioFeed;
 
         private readonly ProgramList _programList;
-        private string _name;
 
         public IEnumerable<RadioBeacon> Beacons
         {
@@ -44,14 +43,7 @@ namespace Radio.Models
 
         public string LogoUri { get; set; }
 
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                _name = value;
-            }
-        }
+        public string Name { get; set; }
 
         public ChannelCoverage Coverage { get; set; }
 
