@@ -2,6 +2,9 @@
 using Windows.ApplicationModel.Background;
 using Windows.Media;
 using Windows.Media.Playback;
+using Windows.Networking;
+using Windows.Networking.Sockets;
+using Windows.Storage;
 using Radio.Helpers;
 using Radio.Models;
 
@@ -52,13 +55,15 @@ namespace Radio.Playback.WindowsPhone
             BackgroundMediaPlayer.Shutdown();
         }
 
-        private void Play(RadioChannel channel)
+        private async void Play(RadioChannel channel)
         {
             var mediaPlayer = BackgroundMediaPlayer.Current;
             mediaPlayer.AutoPlay = true;
-            mediaPlayer.SetUriSource(new Uri(channel.SelectedWebRadioFeed.HighQualityStreamUri));
 
-            //Update the universal volume control
+            var uri = new Uri(channel.SelectedWebRadioFeed.HighQualityStreamUri);
+            mediaPlayer.SetUriSource(uri);
+
+            //update the universal volume control.
             _systemMediaTransportControl.ButtonPressed += MediaTransportControlButtonPressed;
             _systemMediaTransportControl.DisplayUpdater.Type = MediaPlaybackType.Music;
 
@@ -73,7 +78,7 @@ namespace Radio.Playback.WindowsPhone
                     artist = currentProgram.Title;
                 }
             }
-
+            
             _systemMediaTransportControl.DisplayUpdater.MusicProperties.Title = channel.Name;
             _systemMediaTransportControl.DisplayUpdater.MusicProperties.Artist = artist;
 
@@ -88,9 +93,9 @@ namespace Radio.Playback.WindowsPhone
             {
                 _systemMediaTransportControl.PlaybackStatus = MediaPlaybackStatus.Playing;
             }
-            else if (sender.CurrentState == MediaPlayerState.Paused)
+            else if (sender.CurrentState == MediaPlayerState.Stopped)
             {
-                _systemMediaTransportControl.PlaybackStatus = MediaPlaybackStatus.Paused;
+                _systemMediaTransportControl.PlaybackStatus = MediaPlaybackStatus.Stopped;
             }
         }
 

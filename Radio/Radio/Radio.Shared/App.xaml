@@ -10,5 +10,6 @@
         <converters:TimeConverter x:Key="TimeConverter" />
         <converters:CollectionVisibilityConverter x:Key="CollectionVisibilityConverter" />
         <converters:RadioWebFeedCollectionVisibilityConverter x:Key="RadioWebFeedCollectionVisibilityConverter" />
+        <SolidColorBrush x:Key="AppColorBrush" Color="#0099FF" />
     </Application.Resources>
 </Application>

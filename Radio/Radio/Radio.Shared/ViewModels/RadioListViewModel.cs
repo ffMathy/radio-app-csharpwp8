@@ -71,7 +71,7 @@ namespace Radio.ViewModels
 
                 await StorageHelper.StoreSetting("LatestChannels", _latestChannels);
 
-                NavigationHelper.NavigationService.Navigate(typeof(PlayerPage));
+                //NavigationHelper.NavigationService.Navigate(typeof(PlayerPage));
             });
 
             NationalChannels = channels.Where(c => c.Coverage == RadioChannel.ChannelCoverage.National);
