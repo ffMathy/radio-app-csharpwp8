@@ -20,7 +20,7 @@
             <Setter Property="ItemTemplate">
                 <Setter.Value>
                     <DataTemplate>
-                        <ListBoxItem Tapped="RadioChannelList_Tapped" HorizontalAlignment="Left" Margin="0" d:DataContext="{d:DesignInstance models:RadioChannel}">
+                        <ListBoxItem Tapped="RadioChannelList_Tapped" HorizontalAlignment="Left" Margin="0" d:DataContext="{d:DesignInstance models:RadioChannel}" FontFamily="Global User Interface">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>

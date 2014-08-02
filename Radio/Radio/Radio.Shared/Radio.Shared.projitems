@@ -36,4 +36,22 @@
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Libraries\HtmlAgilityPack.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Stations\Denmark\anr.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Stations\Denmark\dr-mama.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Stations\Denmark\dr-nyheder.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Stations\Denmark\dr-p1.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Stations\Denmark\dr-p2.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Stations\Denmark\dr-p3.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Stations\Denmark\dr-p4.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Stations\Denmark\dr-p5.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Stations\Denmark\dr-p6.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Stations\Denmark\dr-p7.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Stations\Denmark\dr-p8.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Stations\Denmark\dr-ramasjang.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Stations\Denmark\nova-fm.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Stations\Denmark\radio-100-fm.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Stations\Denmark\radio24syv.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Stations\Denmark\the-voice.jpg" />
+  </ItemGroup>
 </Project>

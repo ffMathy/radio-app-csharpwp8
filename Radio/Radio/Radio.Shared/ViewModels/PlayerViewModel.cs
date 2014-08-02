@@ -22,12 +22,7 @@ namespace Radio.ViewModels
 
         public event OnPlayRequestedEventHandler OnPlayRequested;
 
-        public IList<object> PanoramaPlaylist { get; private set; }
-
-        public IList<RadioChannel> Playlist
-        {
-            get { return PanoramaPlaylist.OfType<RadioChannel>().ToList(); }
-        }
+        public IList<RadioChannel> Playlist { get; private set; }
 
         //public DateTime? SleepTimer
         //{
@@ -123,7 +118,7 @@ namespace Radio.ViewModels
             var latestChannels = viewModel.LatestChannels.ToList();
             var allChannels = viewModel.AllChannels.ToList();
 
-            PanoramaPlaylist = allChannels.OrderBy(channel => latestChannels.IndexOf(channel) == -1 ? int.MaxValue : latestChannels.IndexOf(channel)).Cast<object>().ToList();
+            Playlist = allChannels.OrderBy(channel => latestChannels.IndexOf(channel) == -1 ? int.MaxValue : latestChannels.IndexOf(channel)).ToList();
         }
 
         //private void RefreshCurrentTrack()

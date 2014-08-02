@@ -103,11 +103,11 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Controls\HorizontalAccordionItem.xaml.cs">
-      <DependentUpon>HorizontalAccordionItem.xaml</DependentUpon>
+    <Compile Include="Controls\HorizontalRadioChannelAccordionItem.xaml.cs">
+      <DependentUpon>HorizontalRadioChannelAccordionItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\HorizontalAccordion.xaml.cs">
-      <DependentUpon>HorizontalAccordion.xaml</DependentUpon>
+    <Compile Include="Controls\HorizontalRadioChannelAccordion.xaml.cs">
+      <DependentUpon>HorizontalRadioChannelAccordion.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -138,6 +138,9 @@
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
+    <Reference Include="WinRTXamlToolkit">
+      <HintPath>..\..\packages\winrtxamltoolkit.1.6.1.3\lib\netcore451\WinRTXamlToolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Radio.Helpers\Radio.Helpers.csproj">
@@ -153,11 +156,11 @@
     <Content Include="Assets\SplashScreen.scale-180.png" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Controls\HorizontalAccordionItem.xaml">
+    <Page Include="Controls\HorizontalRadioChannelAccordionItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\HorizontalAccordion.xaml">
+    <Page Include="Controls\HorizontalRadioChannelAccordion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
