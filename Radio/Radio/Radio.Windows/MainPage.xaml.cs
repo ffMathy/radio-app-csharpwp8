@@ -2,6 +2,7 @@
 
 // The Hub Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=321224
 using Windows.UI.Xaml.Input;
+using Radio.Models;
 using Radio.ViewModels;
 
 namespace Radio
@@ -21,7 +22,14 @@ namespace Radio
 
         private void RadioChannelList_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            
+            var listBoxItem = (ListBoxItem) sender;
+            var radioChannel = (RadioChannel) listBoxItem.DataContext;
+
+            var viewModel = RadioListViewModel.Instance;
+            if (viewModel.ChannelTappedCommand.CanExecute(radioChannel))
+            {
+                viewModel.ChannelTappedCommand.Execute(radioChannel);
+            }
         }
     }
 }
