@@ -18,6 +18,10 @@ namespace Radio.ViewModels
         private RadioChannel _currentlyPlayingRadio;
         private ConnectionProfile _currentNetworkAvailability;
 
+        public delegate void OnPlayRequestedEventHandler(RadioChannel channel);
+
+        public event OnPlayRequestedEventHandler OnPlayRequested;
+
         public IList<object> PanoramaPlaylist { get; private set; }
 
         public IList<RadioChannel> Playlist
@@ -64,7 +68,7 @@ namespace Radio.ViewModels
                     value.PropertyChanged += value_PropertyChanged;
                 }
 
-                PlayRadio(value, false);
+                PlayRadio(value);
             }
         }
 
@@ -72,7 +76,7 @@ namespace Radio.ViewModels
         {
             if (e.PropertyName == "SelectedWebRadioFeed")
             {
-                PlayRadio(CurrentlyPlayingRadio, false);
+                PlayRadio(CurrentlyPlayingRadio);
             }
         }
 
@@ -108,7 +112,7 @@ namespace Radio.ViewModels
             {
                 _currentNetworkAvailability = newStatus;
 
-                PlayRadio(CurrentlyPlayingRadio, forceFailConnection);
+                PlayRadio(CurrentlyPlayingRadio);
             }
         }
 
@@ -147,33 +151,13 @@ namespace Radio.ViewModels
         //    }
         //}
 
-        private void PlayRadio(RadioChannel radioChannel, bool forceLowQuality)
+        private void PlayRadio(RadioChannel radioChannel)
         {
             _currentlyPlayingRadio = radioChannel;
-            //if (_currentlyPlayingRadio == null)
-            //{
-            //    BackgroundAudioPlayer.Instance.Stop();
-            //}
-            //else
-            //{
-
-            //    var currentlyPlayingWebFeed = radioChannel.SelectedWebRadioFeed;
-
-            //    var uri = currentlyPlayingWebFeed.HighQualityStreamUri;
-            //    if ((_currentNetworkAvailability.Bandwidth != -1 && _currentNetworkAvailability.Bandwidth < 128 * 1.5) ||
-            //        forceLowQuality)
-            //    {
-            //        uri = currentlyPlayingWebFeed.LowQualityStreamUri;
-            //    }
-
-            //    var track = new AudioTrack(new Uri(uri), radioChannel.Name, null, null, null,
-            //        radioChannel.Name, EnabledPlayerControls.Pause | EnabledPlayerControls.SkipNext | EnabledPlayerControls.SkipPrevious);
-
-            //    BackgroundAudioPlayer.Instance.Track = track;
-            //    BackgroundAudioPlayer.Instance.Play();
-
-            //}
-
+            if (OnPlayRequested != null)
+            {
+                OnPlayRequested(radioChannel);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -22,12 +22,12 @@
 
     <!--LayoutRoot contains the root grid where all other page content is placed-->
     <Grid x:Name="LayoutRoot">
-        <Grid Grid.Row="0" VerticalAlignment="Stretch" Margin="0">
-            <Image Name="BackgroundImage" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="UniformToFill" />
+        <Grid Grid.Row="0" VerticalAlignment="Stretch" Margin="0,0,0,300">
+            <Image Name="BackgroundImage" VerticalAlignment="Top" HorizontalAlignment="Center" Stretch="UniformToFill" />
 
             <Rectangle VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Opacity="0.975">
                 <Rectangle.Fill>
-                    <LinearGradientBrush EndPoint="0.5,0.45" StartPoint="0.5,0">
+                    <LinearGradientBrush EndPoint="0.5,0.5" StartPoint="0.5,0">
                         <GradientStop Color="#AA000000" Offset="0"/>
                         <GradientStop Color="Black" Offset="1"/>
                     </LinearGradientBrush>

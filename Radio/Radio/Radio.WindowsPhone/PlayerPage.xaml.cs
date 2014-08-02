@@ -2,12 +2,14 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Windows.Storage;
+using Windows.Foundation.Collections;
+using Windows.Media.Playback;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using Radio.Controls;
+using Radio.Helpers;
 using Radio.Models;
 using Radio.ViewModels;
 using Windows.UI.ViewManagement;
@@ -29,8 +31,12 @@ namespace Radio
         private readonly AppBarButton _pinBarButton;
         private readonly AppBarButton _fmRadioBarButton;
 
+        private readonly MediaPlayer _player;
+
         public PlayerPage()
         {
+            _player = BackgroundMediaPlayer.Current;
+
             var statusBar = StatusBar.GetForCurrentView();
             statusBar.HideAsync();
 
@@ -122,9 +128,12 @@ namespace Radio
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
 
-            DataContext = PlayerViewModel.Instance;
+            var viewModel = PlayerViewModel.Instance;
+            DataContext = viewModel;
 
-            var radioName = (string) e.Parameter;
+            viewModel.OnPlayRequested += viewModel_OnPlayRequested;
+
+            var radioName = (string)e.Parameter;
             if (!string.IsNullOrEmpty(radioName))
             {
 
@@ -137,6 +146,19 @@ namespace Radio
             }
 
             //InstallSleepTimerIfNeeded();
+        }
+
+        void viewModel_OnPlayRequested(RadioChannel channel)
+        {
+            var message = new ValueSet
+                    {
+                        {
+                            "Play",
+                            SerializationHelper.Serialize(channel)
+                        }
+                    };
+            BackgroundMediaPlayer.SendMessageToBackground(message);
+
         }
 
         //private void InstallSleepTimerIfNeeded()
@@ -197,7 +219,7 @@ namespace Radio
 
         private void Hub_OnSectionsInViewChanged(object sender, SectionsInViewChangedEventArgs e)
         {
-            var hub = (ItemsHub) sender;
+            var hub = (ItemsHub)sender;
             var sections = hub.SectionsInView;
 
             if (sections.Any())
